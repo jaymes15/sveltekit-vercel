@@ -7,13 +7,13 @@ env:
 on:
   push:
     branches:
-      - main
-      - master
+      - deploy_to_vercel
   pull_request: []
 
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/deploy_to_vercel'
     steps:
       - uses: actions/checkout@v2
       - name: Install Vercel CLI
