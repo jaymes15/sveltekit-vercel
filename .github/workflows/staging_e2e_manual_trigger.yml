@@ -1,0 +1,30 @@
+name: E2E Manual Trigger
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Specify that this workflow is triggered by a manual workflow_dispatch event
+    types: [workflow_dispatch]
+
+jobs:
+  e2e_manual_trigger:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Rename and Update .env File
+        run: |
+          mv .sample.build.env .env
+
+          # Get the new value from GitHub Actions input
+          new_value="${{ github.event.inputs.app_base_url }}"
+
+          # Escape slashes in the new value to prevent issues with sed
+          escaped_new_value=$(echo "$new_value" | sed 's/[\/&]/\\&/g')
+
+          # Replace the value in the .env file
+          sed -i "s|PUBLIC_APP_BASE_URL=.*|PUBLIC_APP_BASE_URL=${escaped_new_value}|g" .env 
+      - name: Install dependencies
+        run: echo "hello"
