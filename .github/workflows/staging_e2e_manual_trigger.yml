@@ -4,16 +4,16 @@ name: E2E Manual Trigger
 # or API.
 on:
   workflow_dispatch:
-    # Specify that this workflow is triggered by a manual workflow_dispatch event
-    types: [workflow_dispatch]
-    branches:
-      - master
+    # # Specify that this workflow is triggered by a manual workflow_dispatch event
+    # types: [workflow_dispatch]
+    # branches:
+    #   - master
 
 jobs:
   e2e_manual_trigger:
     runs-on: ubuntu-20.04
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      # - name: Checkout
+      #   uses: actions/checkout@v4
       - name: Install dependencies
         run: echo "hello"
