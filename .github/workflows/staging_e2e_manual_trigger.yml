@@ -6,6 +6,8 @@ on:
   workflow_dispatch:
     # Specify that this workflow is triggered by a manual workflow_dispatch event
     types: [workflow_dispatch]
+    branches:
+      - master
 
 jobs:
   e2e_manual_trigger:
